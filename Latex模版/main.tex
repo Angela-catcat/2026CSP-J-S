@@ -1,0 +1,507 @@
+%% =====================================================================
+%%  普及组 CSP-J 2025 初赛模拟卷 2 —— 正文
+%%  编译：xelatex csp_mock_paper.tex （需与 cspexam.cls 同目录，跑两遍）
+%%  字体依赖：Noto Serif CJK SC / Noto Sans CJK SC / DejaVu Sans Mono
+%% =====================================================================
+\documentclass{cspexam}
+
+\begin{document}
+
+\examtitle{普及组 CSP-J 2025 初赛模拟卷 2}
+\examinfo{120 分钟}{100 分}
+
+% =====================================================================
+\bigsection{一、单项选择题}{（共 15 题，每题 2 分，共计 30 分；每题有且仅有一个正确选项）}
+
+\Q 在 C++ 程序中，假设一个字符占用的内存空间是 1 字节，则下列程序中，s 占用的内存空间是（\quad）字节。
+\begin{ncode}
+char s[] = "hello oiers";
+size_t cnt = strlen(s);
+cout << cnt << endl;
+\end{ncode}
+\begin{optrow}
+\op A. 10 \op B. 11 \op C. 13 \op D. 12
+\end{optrow}
+
+\Q 十六进制数 B2025 转换成八进制数是（\quad）。
+\begin{optrow}
+\op A. 2620045 \op B. 2004526 \op C. 729125 \op D. 2420045
+\end{optrow}
+
+\Q 以下能正确定义二维数组的是（\quad）。
+\begin{optgrid}
+\op A.\co|int a[3][];|
+\op B.\co|int a[][];|
+\op C.\co|int a[][4];|
+\op D.\co|int a[][2] = {{1,2},{1,2},{3,4}};|
+\end{optgrid}
+
+\Q 二进制[10000011]原码和[10000011]补码表示的十进制数值分别是（\quad）。
+\begin{optrow}
+\op A. $-125$，$-3$ \op B. $-3$，$-125$ \op C. $-3$，$-3$ \op D. $-125$，$-125$
+\end{optrow}
+
+\Q 在 C++ 中，下列定义方式中，变量的值不能被修改的是（\quad）。
+\begin{optgrid}
+\op A.\co|unsigned int a = 5;|
+\op B.\co|static double d = 3.14;|
+\op C.\co|string s = "ccf csp-j";|
+\op D.\co|const char c = 'k';|
+\end{optgrid}
+
+\Q 走迷宫的深度优先搜索算法经常用到的数据结构是（\quad）。
+\begin{optrow}
+\op A. 向量 \op B. 栈 \op C. 链表 \op D. 队列
+\end{optrow}
+
+\Q 关于递归，以下叙述中正确的是（\quad）。
+\begin{optcol}
+\op A. 动态规划算法都是用递归实现的
+\op B. 递归比递推更高级，占用的内存空间更少
+\op C. A 函数调用 B 函数，B 函数再调用 A 函数不属于递归的一种
+\op D. 递归是通过调用自身来求解问题的编程技术
+\end{optcol}
+
+\Q 以下不属于计算机输入设备的是（\quad）。
+\begin{optrow}
+\op A. 扫描仪 \op B. 显示器 \op C. 鼠标 \op D. 麦克风
+\end{optrow}
+
+\Q 关于排序算法，下面的说法中正确的是（\quad）。
+\begin{optcol}
+\op A. 快速排序算法在最坏情况下的时间复杂度是 \(O(n\log n)\)
+\op B. 插入排序算法的时间复杂度是 \(O(n\log n)\)
+\op C. 归并排序算法的时间复杂度是 \(O(n\log n)\)
+\op D. 冒泡排序算法是不稳定的
+\end{optcol}
+
+\Q 下列关于 C++ 语言的叙述中不正确的是（\quad）。
+\begin{optcol}
+\op A. 变量没有定义也能使用
+\op B. 变量名不能以数字开头，且中间不能有空格
+\op C. 变量名不能和 C++ 语言中的关键字重复
+\op D. 变量在定义的时候可以不用赋值
+\end{optcol}
+
+\Q 如果 x 和 y 均为 int 类型的变量，下列表达式中能正确判断“x 等于 y”的是（\quad）。
+\begin{optgrid}
+\op A.\co|(1 == (x / y))|
+\op B.\co|(x == (x & y))|
+\op C.\co|(0 == (x ^ y))|
+\op D.\co!(y == (x | y))!
+\end{optgrid}
+
+\Q 在如今的智能互联网时代，AI 如火如荼，除了计算机领域以外，通信领域的技术发展也做出了很大贡献。被称为“通信之父”的是（\quad）。
+\begin{optgrid}
+\op A. 克劳德·香农
+\op B. 莱昂哈德·欧拉
+\op C. 约翰·冯·诺依曼
+\op D. 戈登·摩尔
+\end{optgrid}
+
+\Q 一棵满二叉树的深度为 3（根结点的深度为 1），按照后序遍历的顺序从 1 开始编号，根结点的右子结点的编号是（\quad）。
+\begin{optrow}
+\op A. 3 \op B. 6 \op C. 7 \op D. 5
+\end{optrow}
+
+\Q 三头奶牛 Bessie、Elise 和 Nancy 去参加考试，考场是连续的 6 间牛棚，用栅栏隔开。为了防止作弊，任意两头奶牛都不能在相邻的牛棚，则考场安排共有（\quad）种不同的方法。
+\begin{optrow}
+\op A. 18 \op B. 24 \op C. 30 \op D. 48
+\end{optrow}
+
+\Q 为强化安全意识，某学校准备在某消防月连续 10 天内随机抽取 3 天进行消防紧急疏散演习，抽取的 3 天为连续 3 天的概率为（\quad）。
+\begin{optrow}
+\op A. 3/10 \op B. 3/20 \op C. 1/15 \op D. 1/18
+\end{optrow}
+
+% =====================================================================
+\bigsection{二、阅读程序}{（程序输入不超过数组或字符串定义的范围；判断题正确填\checkmark，错误填$\times$；除特殊说明外，判断题每题 1.5 分，选择题每题 3 分，共计 40 分）}
+
+\subprob{（1）}
+\begin{ncode}
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+using i64 = long long;
+
+int clz(i64 x)
+{
+    for(int i = 0; i != 64; i++)
+        if((x >> (63 - i)) & 1)
+            return i;
+    return 64;
+}
+
+bool cmp(i64 x, i64 y)
+{
+    if(clz(x) == clz(y))
+        return x < y;
+    return clz(x) < clz(y);
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for(int i = 0; i < n; i++)
+        cin >> a[i];
+    sort(a.begin(), a.end(), cmp);
+    for(int i = 0; i < n; i++)
+        cout << a[i] << " \n"[i == n - 1];
+    return 0;
+}
+\end{ncode}
+
+\subsec{判断题}
+
+\Q 若程序输入 5 0 4 2 1 3，则程序输出 4 2 3 1 0。\tfend
+\Q 若将第 19 行中的 < 换为 >，则当程序输入 5 0 4 2 1 3 时，程序输出为 4 3 2 1 0。\tfend
+\Q 当调用 \co|cmp(3, 3)| 时，函数的返回值为 \co|false|。\tfend
+
+\subsec{选择题}
+
+\Q 若输入 5 4 2 1 3 1，则输出是什么？（\quad）
+\begin{optrow}
+\op A. 3 4 2 1 1 \op B. 3 2 4 1 1 \op C. 4 3 2 1 1 \op D. 4 2 3 1 1
+\end{optrow}
+
+\Q 这个程序实现了什么功能？（\quad）
+\begin{optcol}
+\op A. 将输入的数组按照二进制位上从左到右第一个 1 前 0 的个数由多到少进行排序
+\op B. 将输入的数组按照二进制位上从左到右第一个 1 前 0 的个数由少到多进行排序
+\op C. 将输入的数组按照二进制位上从左到右第一个 1 前 0 的个数由多到少进行排序，当 0 的个数相同时，按照原数字由小到大进行排序
+\op D. 将输入的数组按照二进制位上从左到右第一个 1 前 0 的个数由少到多进行排序，当 0 的个数相同时，按照原数字由小到大进行排序
+\end{optcol}
+
+% ---------------------------------------------------------------------
+\subprob{（2）}
+\begin{ncode}
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <set>
+#include <string>
+using namespace std;
+
+const int inf = 0x3f3f3f3f;
+
+int calc(vector<vector<int>> &grid)
+{
+    int m = grid.size(), n = grid[0].size();
+    vector<vector<int>> dp(m + 1, vector<int>(n + 1, inf));
+    dp[0][0] = grid[0][0];
+    for(int i = 0; i < m; i++)
+        for(int j = 0; j < n; j++)
+        {
+            if(i > 0)
+                dp[i][j]=min(dp[i][j], dp[i-1][j] + grid[i][j]);
+            if(j > 0)
+                dp[i][j]=min(dp[i][j], dp[i][j-1] + grid[i][j]);
+        }
+    return dp[m - 1][n - 1];
+}
+
+int main()
+{
+    int m, n;
+    cin >> m >> n;
+    vector<vector<int>> a(m, vector<int>(n));
+    for(int i = 0; i < m; i++)
+        for(int j = 0; j < n; j++)
+            cin >> a[i][j];
+    cout << calc(a) << endl;
+    return 0;
+}
+\end{ncode}
+
+\vspace{0.4em}
+\hspace*{\Qindent}假设 \(m\le 100\)，\(n\le 10000\)，完成下面的问题。
+
+\subsec{判断题}
+
+\Q 若输入 2[118;1:3u 3 1 2 3 4 5 6，则输出为 10。\tfend
+\Q 计算 dp 数组的时间复杂度为 \(O(n^2)\)。\tfend
+\Q （2 分）在 calc 函数中，访问 \co|dp[m][n]| 不会发生越界错误。\tfend
+
+\subsec{选择题}
+
+\Q 当输入的 a 数组为\co|{{1, 3, 1}, {1, 5, 1}, {4, 2, 1}}|时，程序输出为（\quad）。
+\begin{optrow}
+\op A. 4 \op B. 7 \op C. 6 \op D. 5
+\end{optrow}
+
+\Q 若将第 19 行改为 \co|dp[i][j] = min(dp[i][j], dp[i-1][j] - grid[i][j]);|，则当输入的 a 数组为\co|{{1, 2, 3}, {4, 5, 6}}|时，程序的输出为（\quad）。
+\begin{optrow}
+\op A. $-3$ \op B. $-2$ \op C. $-1$ \op D. 0
+\end{optrow}
+
+\Q （4 分）若将第 10 行中的 \& 符号去除，可能出现什么情况？（\quad）
+\begin{optgrid}
+\op A. dp 数组计算错误
+\op B. calc 函数中的 grid 数组和 a 数组不一致
+\op C. 无影响
+\op D. 发生编译错误
+\end{optgrid}
+
+% ---------------------------------------------------------------------
+\subprob{（3）}
+\begin{ncode}
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <set>
+#include <string>
+using namespace std;
+
+const int N = 1010;
+
+vector<int> E[N];
+int V[N];
+int n;
+
+void add(int x, int y)
+{
+    E[x].push_back(y);
+}
+
+int gcd(int x, int y)
+{
+    return !y ? x : gcd(y, x % y);
+}
+
+void calc(int cur, int fa)
+{
+    V[cur] = (gcd(cur, fa) != 1);
+    for(auto v: E[cur])
+    {
+        if(v == fa)
+            continue;
+        calc(v, cur);
+        V[cur] += V[v];
+    }
+    return;
+}
+
+int main()
+{
+    cin >> n;
+    for(int i = 1; i < n; i++)
+    {
+        int x, y;
+        cin >> x >> y;
+        add(x, y);
+        add(y, x);
+    }
+    calc(1, 1);
+    for(int i = 1; i <= n; i++)
+        cout << V[i] << " \n"[i == n];
+    return 0;
+}
+\end{ncode}
+
+\vspace{0.4em}
+\hspace*{\Qindent}已知 \co|gcd(x, y)| 的时间复杂度为 \(O(\log(\min(x,y)))\)，输入中 \(1\le x,y\le n\) 且 \co|x != y|，回答下面的问题。
+
+\subsec{判断题}
+
+\Q 当输入为 4 1 2 1 3 1 4 时，程序的输出为 0 0 0 0。\tfend
+\Q gcd 函数用来计算两个数 x 和 y 的最大公约数。\tfend
+\Q 对于树上的一条边\co|(x, y)|，若 x 为 y 的父结点，则必然有 \co|V[x] <= V[y]|。\tfend
+
+\subsec{选择题}
+
+\Q 当输入为 4 1 2 1 3 2 4 时，程序的输出为（\quad）。
+\begin{optrow}
+\op A. 0 0 0 0 \op B. 1 1 0 1 \op C. 0 0 1 0 \op D. 1 1 1 1
+\end{optrow}
+
+\Q （4 分）calc 函数的时间复杂度为（\quad）。
+\begin{optrow}
+\op A. \(O(n\log n)\) \op B. \(O(n^2)\) \op C. \(O(n)\) \op D. \(O(\log n)\)
+\end{optrow}
+
+\Q 若将第 32 行中的代码改为 \co|V[cur] *= V[v]|，则当输入为 4 1 2 1 3 2 4 时，得到的输出为（\quad）。
+\begin{optrow}
+\op A. 1 1 1 0 \op B. 1 1 0 1 \op C. 0 0 1 0 \op D. 0 0 0 1
+\end{optrow}
+
+% =====================================================================
+\bigsection{三、完善程序}{（单选题，每小题 3 分，共计 30 分）}
+
+\probdesc{（1）题目描述：}
+\hspace*{\Qindent}给定一个长为 n（\(1\le n\le 2\times10^5\)）的数组 a（\(-10^9\le a[i]\le 10^9\)），执行如下操作，直到 a 中只剩下 1 个数：
+
+\hspace*{\Qindent}删除 a[i]。如果 a[i] 左右两边都有数字，则把 a[i$-$1] 和 a[i$+$1] 合成一个数。输出最后剩下的那个数的最大值。
+\begin{ncode}
+#include <bits/stdc++.h>
+using namespace std;
+
+using i64 = long long;
+
+void solve()
+{
+    int n, flag = 0, mx = (@\Circ{1}@);
+    cin >> n;
+    vector<int> a(n + 1);
+    for(int i = 1; i <= n; i++)
+    {
+        cin >> a[i];
+        if(a[i] < 0)
+            flag++;
+        mx = max(mx, a[i]);
+    }
+    if((@\Circ{2}@))
+    {
+        cout << mx << endl;
+        return;
+    }
+    (@\Circ{3}@) sum1 = 0, sum2 = 0;
+    for(int i = 1; i <= n; i += 2)
+        sum1 += max(a[i], 0);
+    for(int i = 2; i <= n; i += 2)
+        (@\Circ{4}@);
+    cout << (@\Circ{5}@) << endl;
+    return;
+}
+
+int main()
+{
+    int t = 1;
+    cin >> t;
+    while(t--)
+        solve();
+}
+\end{ncode}
+
+\Q ①处应填（\quad）。
+\begin{optrow}
+\op A. 0 \op B. 1E9 \op C. $-$1E8 \op D. $-$2E9
+\end{optrow}
+
+\Q ②处应填（\quad）。
+\begin{optrow}
+\op A.\co|flag==n| \op B.\co|flag==0| \op C.\co|flag!=0| \op D.\co|flag!=n|
+\end{optrow}
+
+\Q ③处应填（\quad）。
+\begin{optrow}
+\op A.\co|int| \op B.\co|i64| \op C.\co|i32| \op D.\co|unsigned int|
+\end{optrow}
+
+\Q ④处应填（\quad）。
+\begin{optgrid}
+\op A.\co|sum2 += max(a[i], 0)|
+\op B.\co|sum2 += min(a[i], 0)|
+\op C.\co|sum2 -= min(a[i], 0)|
+\op D.\co|sum2 -= max(a[i], 0)|
+\end{optgrid}
+
+\Q ⑤处应填（\quad）。
+\begin{optgrid}
+\op A.\co|min(sum1, sum2)|
+\op B.\co|max(sum1, sum2)|
+\op C.\co|sum1 + sum2|
+\op D.\co|sum1 - sum2|
+\end{optgrid}
+
+% ---------------------------------------------------------------------
+\probdesc{（2）题目描述：}
+\hspace*{\Qindent}给定一个字符串 t 和一个字符串列表 s 作为字典。保证 s 中的字符串互不相同，且 t 和 s[i] 中均只包含小写英文字母。
+
+\hspace*{\Qindent}如果可以利用字典中出现的一个或多个单词拼接出 t，则返回 true。注意：不要求字典中出现的单词全部使用，并且字典中的单词可以重复使用。
+
+\hspace*{\Qindent}数据限制：\(1\le\) t.length()\,\(\le 300\)，\(1\le\) s.size()\,\(\le 1000\)，\(1\le\) s[i].length()\,\(\le 20\)。
+\begin{ncode}
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <set>
+#include <string>
+using namespace std;
+
+const int N = 1010;
+
+int n, mx, m;
+vector<string> s;
+vector<int> mem;
+string t;
+set<string> st;
+
+int dfs(int i)
+{
+    if(i == 0)
+        return 1;
+    if((@\Circ{1}@))
+        return mem[i];
+    for(int j = i - 1; j >= max(i - mx, 0); j--)
+        if(st.find((@\Circ{2}@)) != st.end() && dfs(j))
+            return mem[i] = 1;
+    return (@\Circ{3}@);
+
+}
+
+int main()
+{
+    cin >> n;
+    s.resize(n);
+    for(int i = 0; i < n; i++)
+    {
+        cin >> s[i];
+        mx = max(mx, (@\Circ{4}@));
+    }
+    st = set<string>(s.begin(), s.end());
+    cin >> t;
+    m = (int)t.length();
+    mem.resize(m + 1, -1);
+    if((@\Circ{5}@))
+        cout << "Yes\n";
+    else
+        cout << "No\n";
+
+    return 0;
+}
+\end{ncode}
+
+\Q ①处应填（\quad）。
+\begin{optgrid}
+\op A.\co|mem[i] != -1|
+\op B.\co|mem[i] == -1|
+\op C.\co|mem[i] == 0|
+\op D.\co|mem[i] != 0|
+\end{optgrid}
+
+\Q ②处应填（\quad）。
+\begin{optgrid}
+\op A.\co|t.substr(i, j - i)|
+\op B.\co|t.substr(j, i - j)|
+\op C.\co|t.substr(j)|
+\op D.\co|t.substr(i)|
+\end{optgrid}
+
+\Q ③处应填（\quad）。
+\begin{optgrid}
+\op A.\co|1|
+\op B.\co|mem[i] = 1|
+\op C.\co|0|
+\op D.\co|mem[i] = 0|
+\end{optgrid}
+
+\Q ④处应填（\quad）。
+\begin{optgrid}
+\op A.\co|s[i].length()|
+\op B.\co|(int)s[i].length()|
+\op C.\co|s[i].length() - 1|
+\op D.\co|(int)s[i].length() - 1|
+\end{optgrid}
+
+\Q ⑤处应填（\quad）。
+\begin{optrow}
+\op A.\co|!dfs(m)| \op B.\co|!dfs(n)| \op C.\co|dfs(m)| \op D.\co|dfs(n)|
+\end{optrow}
+
+\answersheet
+\end{document}
+

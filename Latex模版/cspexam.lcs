@@ -1,0 +1,235 @@
+%% =====================================================================
+%%  cspexam.cls  ——  CSP-J / CSP-S 初赛模拟卷 LaTeX 模板（XeLaTeX）
+%%  编译：xelatex csp_mock_paper.tex （跑两遍；lastpage 需要两遍）
+%%  字体依赖：Noto Serif CJK SC / Noto Sans CJK SC / DejaVu Sans Mono
+%% =====================================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{cspexam}[2026/06/17 CSP exam paper class]
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
+\ProcessOptions\relax
+\LoadClass[11pt]{article}
+
+% ---------- 基础宏包 ----------
+\RequirePackage{fontspec}
+\RequirePackage{geometry}
+\RequirePackage{fancyhdr}
+\RequirePackage{array}
+\RequirePackage{booktabs}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{listings}
+\RequirePackage{xcolor}
+\RequirePackage{enumitem}
+\RequirePackage{needspace}   % 分页守卫
+\RequirePackage{lastpage}    % 页脚“共 N 页”
+\RequirePackage{multirow}    % 答题纸：跨行“第 N 题”
+\RequirePackage{tikz}        % 答题纸：阅卷人虚线圆角框
+
+% ---------- 功能开关（按需切换）----------
+\newif\ifexamfooter \examfootertrue    % 页脚页码：第 X 页 / 共 N 页（设 false 恢复原卷无页码）
+\newif\ifexamanswer \examanswerfalse   % 答案模式：true 显示 \key{} 标注的答案
+
+% ---------- 版面（A4，可按需微调）----------
+\geometry{a4paper,
+  left=2.7cm, right=2.7cm, top=2.6cm, bottom=2.4cm,
+  headheight=16pt, headsep=20pt, footskip=24pt}
+
+% ---------- 字体 ----------
+\setmainfont{Noto Serif CJK SC}            % 正文宋体（中西文同体）
+\newfontfamily\heiti{Noto Sans CJK SC}     % 黑体：标题与小节
+\newfontfamily\codefont{DejaVu Sans Mono}  % 等宽：代码
+
+% XeTeX 中文断行
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+\linespread{1.22}\selectfont
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\frenchspacing
+
+% ---------- 页眉：仅一条横线；页脚：页码（开关控制）----------
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.8pt}
+\renewcommand{\footrulewidth}{0pt}
+\ifexamfooter
+  \fancyfoot[C]{\small 第 \thepage{} 页\quad（共 \pageref*{LastPage} 页）}
+\fi
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0.8pt}%
+  \ifexamfooter\fancyfoot[C]{\small 第 \thepage{} 页\quad（共 \pageref*{LastPage} 页）}\fi}
+
+% =====================  标题与小节  =====================
+\newcommand{\examtitle}[1]{%
+  \begin{center}\heiti\bfseries\fontsize{19pt}{24pt}\selectfont #1\end{center}
+  \vspace{1.0em}}
+
+% 首页信息栏（可选）：\examinfo{考试时长}{满分}
+\newcommand{\examinfo}[2]{%
+  \begin{center}\small
+    考试时长：#1\qquad 满分：#2\qquad 姓名：\underline{\hspace{4em}}\qquad 考号：\underline{\hspace{5em}}%
+  \end{center}\vspace{0.8em}}
+
+% 答案标注：\key{C} 置于题干末；仅答案模式显示
+\newcommand{\key}[1]{\ifexamanswer\nobreak\hfill{\heiti\bfseries\color{red}【答案：#1】}\fi}
+
+\newcommand{\bigsection}[2]{%
+  \par\addvspace{1.4em}\needspace{4\baselineskip}%
+  {\heiti\bfseries #1#2}\par\addvspace{0.9em}}
+\newcommand{\subsec}[1]{%
+  \par\addvspace{1.0em}\needspace{3\baselineskip}%
+  {\heiti\bfseries\raisebox{0.05em}{\rule{0.72em}{0.72em}}\hspace{0.5em}#1}\par
+  \addvspace{0.4em}}
+\newcommand{\subprob}[1]{\par\addvspace{0.9em}\needspace{6\baselineskip}{\heiti\bfseries #1}\par\addvspace{0.3em}}
+\newcommand{\probdesc}[1]{\par\addvspace{0.9em}\needspace{5\baselineskip}{\heiti\bfseries #1}\par\addvspace{0.2em}}
+
+% =====================  题目（全卷连续编号）  =====================
+\newcounter{Qnum}
+\newlength{\Qindent}\setlength{\Qindent}{2.4em}
+\newcommand{\Qsep}{1.55em}
+\newcommand{\Q}{\par\addvspace{\Qsep}\refstepcounter{Qnum}%
+  \hangindent\Qindent\hangafter=1\noindent
+  \makebox[\Qindent][l]{\theQnum.}\ignorespaces}
+\newcommand{\tfbox}{\nobreak\hfill\makebox[3.2em][l]{(\hfill)}}
+\newcommand{\tfend}{\tfbox\par}
+
+% =====================  代码环境  =====================
+\definecolor{codenum}{gray}{0.30}
+\definecolor{cframe}{gray}{0.55}   % 代码块边框色
+\newcommand{\Circ}[1]{{\normalfont\char\numexpr"245F+#1\relax}}  % ①..⑮
+\lstset{
+  basicstyle=\codefont\fontsize{10.2pt}{13pt}\selectfont,
+  columns=fullflexible, keepspaces=true, showstringspaces=false,
+  breaklines=false, tabsize=4,
+  escapeinside={(@}{@)},
+  literate=*{<<}{{<<}}2 {>>}{{>>}}2,
+}
+\lstnewenvironment{ncode}{%   带行号（01,02… 两位补零）+ 细实线全框
+  \lstset{numbers=left, numberstyle=\codefont\fontsize{10.2pt}{13pt}\selectfont\color{codenum},
+          numbersep=1.0em, xleftmargin=3.0em, framexleftmargin=3.0em,
+          aboveskip=1.0em, belowskip=0.5em,
+          frame=single, rulecolor=\color{cframe}, framesep=6pt}%
+}{}
+\renewcommand{\thelstnumber}{\ifnum\value{lstnumber}<10 0\fi\arabic{lstnumber}}
+\lstnewenvironment{code}{%    无行号（题干内嵌小段）
+  \lstset{numbers=none, xleftmargin=\Qindent, aboveskip=0.4em, belowskip=0.3em}%
+}{}
+\newcommand{\co}{\lstinline[basicstyle=\codefont\fontsize{10.2pt}{12pt}\selectfont]}
+% 可折行的行内代码（用于 4×1 长代码；放不下时自动回绕）
+\newcommand{\cob}{\lstinline[basicstyle=\codefont\fontsize{10.2pt}{12pt}\selectfont,%
+  breaklines=true, breakatwhitespace=true]}
+
+% =====================  选项布局 optrow / optgrid / optcol  =====================
+\newcount\csp@cols
+\newcount\csp@pos
+\def\csp@amp{&}
+\def\csp@row{\tabularnewline\addlinespace[3.5pt]\global\csp@pos=0 }
+\newcommand{\op}{%
+  \ifnum\csp@pos=0
+     \let\csp@sep\relax
+  \else
+     \ifnum\csp@pos<\csp@cols \let\csp@sep\csp@amp \else \let\csp@sep\csp@row \fi
+  \fi
+  \csp@sep \global\advance\csp@pos by 1\relax \ignorespaces}
+% 1×4（列宽 .18/.28/.28/.18 为短选项调校；长选项卷子可改四等分 .22）
+\newenvironment{optrow}{%
+  \par\nobreak\addvspace{0.6em}\needspace{2.5\baselineskip}\global\csp@cols=4 \global\csp@pos=0 %
+  \noindent\hspace*{\Qindent}%
+  \begin{tabular}[t]{@{}>{\raggedright\arraybackslash}p{.18\linewidth}@{}%
+                      >{\raggedright\arraybackslash}p{.28\linewidth}@{}%
+                      >{\raggedright\arraybackslash}p{.28\linewidth}@{}%
+                      >{\raggedright\arraybackslash}p{.18\linewidth}@{}}%
+}{\end{tabular}\par}
+% 2×2
+\newenvironment{optgrid}{%
+  \par\nobreak\addvspace{0.6em}\needspace{2.5\baselineskip}\global\csp@cols=2 \global\csp@pos=0 %
+  \noindent\hspace*{\Qindent}%
+  \begin{tabular}[t]{@{}>{\raggedright\arraybackslash}p{.46\linewidth}@{}%
+                      >{\raggedright\arraybackslash}p{.46\linewidth}@{}}%
+}{\end{tabular}\par}
+% 4×1（长选项换行、续行悬挂对齐）
+\newenvironment{optcol}{%
+  \par\nobreak\addvspace{0.55em}\needspace{2.5\baselineskip}%
+  \begingroup
+  \setlength{\leftskip}{\Qindent}%
+  \def\op{\par\hangindent1.9em\hangafter=1\noindent\ignorespaces}%
+  \op
+}{\par\endgroup\addvspace{0.1em}}
+
+% =====================================================================
+%  答题纸（独立最后一页）：在 \end{document} 前调用 \answersheet
+% =====================================================================
+\newcommand{\sealdash}{\leaders\hbox to 8pt{\hfil\rule[2.2pt]{5pt}{0.4pt}\hfil}\hfill}
+\newcommand{\asreadblock}[1]{%
+  \noindent\begin{tabular}{|>{\centering\arraybackslash}p{1.8cm}|*{6}{>{\centering\arraybackslash}p{1.92cm}|}}
+  \hline
+  \multirow{3}{*}{第 #1 题} & \multicolumn{6}{c|}{判断题（填√或×）及单选题}\\ \cline{2-7}
+   & 1 & 2 & 3 & 4 & 5 & 6 \\ \cline{2-7}
+   & \rule{0pt}{19pt} & & & & & \\ \hline
+  \end{tabular}\par\vspace{0.28em}}
+\newcommand{\answersheet}{%
+\clearpage \thispagestyle{empty}\enlargethispage{2.5cm}
+\vspace*{-1.15cm}
+% 顶部填写栏
+{\small
+省份：\rule[-3pt]{2.3cm}{0.4pt}\hfill 分赛区：\rule[-3pt]{2.3cm}{0.4pt}\hfill 学校：\rule[-3pt]{4.2cm}{0.4pt}\par
+\vspace{0.7em}
+姓名：\rule[-3pt]{4.2cm}{0.4pt}\hfill 性别：\rule[-3pt]{1.8cm}{0.4pt}\hfill 准考证号：\rule[-3pt]{3.8cm}{0.4pt}\par}
+% 密封线
+\vspace{0.6em}
+\noindent\makebox[\textwidth]{\sealdash\hspace{1em}{\heiti 密}\hspace{0.7em}{\heiti 封}\hspace{0.7em}{\heiti 线}\hspace{1em}\sealdash}
+\vspace{0.7em}
+% 标题
+\begin{center}
+{\heiti\bfseries\large CCF 非专业级别软件能力认证第一轮}\\[0.4em]
+{\heiti\bfseries\large （CSP-J/S）入门级答题纸}\\[0.55em]
+{\small 语言：\ {\large$\square$}\,Pascal\quad{\large$\square$}\,C++\quad{\large$\square$}\,C\quad（请考生在选择的语言前打\checkmark）}
+\end{center}
+\vspace{0.4em}
+% 阅卷人虚线圆角框
+\renewcommand{\arraystretch}{1.38}
+\begin{center}
+\begin{tikzpicture}
+\node[draw, dashed, rounded corners=10pt, inner sep=8pt, line width=0.5pt]{%
+  \begin{tabular}{@{}c@{}}
+  {\heiti 本表由阅卷人员填写}\\[2pt]
+  \begin{tabular}{|>{\centering\arraybackslash}p{2.0cm}|*{4}{>{\centering\arraybackslash}p{2.2cm}|}}
+  \hline
+   & 一 & 二 & 三 & 总分 \\ \hline
+  得分 & & & & \\ \hline
+  评卷人 & & & & \\ \hline
+  复核人 & & & & \\ \hline
+  \end{tabular}
+  \end{tabular}};
+\end{tikzpicture}
+\end{center}
+\vspace{0.3em}
+% 一、单项选择题
+\renewcommand{\arraystretch}{1.25}
+{\heiti 一、单项选择题（共 15 题，每题 2 分，共计 30 分）}\par\vspace{0.45em}
+\setlength{\tabcolsep}{2pt}
+\noindent\begin{tabular}{|*{10}{>{\centering\arraybackslash}p{1.27cm}|}}
+\hline
+1&2&3&4&5&6&7&8&9&10\\ \hline
+\rule{0pt}{19pt}&&&&&&&&&\\ \hline
+\end{tabular}\par\nointerlineskip
+\noindent\begin{tabular}{|*{5}{>{\centering\arraybackslash}p{1.27cm}|}}
+\hline
+11&12&13&14&15\\ \hline
+\rule{0pt}{19pt}&&&&\\ \hline
+\end{tabular}\par
+\vspace{0.5em}
+% 二、阅读程序
+{\heiti 二、阅读程序（除特殊说明外，判断题 1.5 分，单选题 3 分，共计 40 分）}\par\vspace{0.45em}
+\asreadblock{1}\asreadblock{2}\asreadblock{3}
+\vspace{0.35em}
+% 三、完善程序
+{\heiti 三、完善程序（单选题，每小题 3 分，共计 30 分）}\par\vspace{0.45em}
+\noindent\begin{tabular}{|*{5}{>{\centering\arraybackslash}p{1.4cm}|}|*{5}{>{\centering\arraybackslash}p{1.4cm}|}}
+\hline
+\multicolumn{5}{|c||}{第 1 题} & \multicolumn{5}{c|}{第 2 题}\\ \hline
+1&2&3&4&5&1&2&3&4&5\\ \hline
+\rule{0pt}{19pt}&&&&&&&&&\\ \hline
+\end{tabular}}
+
+\endinput
+
